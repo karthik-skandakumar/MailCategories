@@ -1,0 +1,10 @@
+body{
+    margin: 0;
+    padding: 5em 0 0 0;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    margin: 55px 20px;
+}

@@ -1,0 +1,13 @@
+<% include partials/htmlHeader.ejs %>
+    <div class="container">
+        
+        <ol>
+            <% mailCategories.forEach((mailCategory) => { %>
+            <li><%= mailCategory.name %>: <%= mailCategory.description %>: Created at <%= mailCategory.created.toDateString() %></li>
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+            </button>
+            <% }); %>
+        </ol>
+    </div>
+<% include partials/htmlFooter.ejs %>
