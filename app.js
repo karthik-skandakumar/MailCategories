@@ -44,6 +44,7 @@ mailCategories.forEach((mailCategory)=>{
 // The default route and the GET for listing all mail categories use the same handler
 app.get("/", defaultHandler);
 app.get("/mailCategories", defaultHandler);
+app.get("/mailCategories/:pageNumber", defaultHandler);
 function defaultHandler(req, res){
     MailCategory.find({}, (err, mailCategories)=>{
         if(err) {
@@ -51,7 +52,8 @@ function defaultHandler(req, res){
             console.log(err);
         }
         else {
-            res.render("index", { mailCategories: mailCategories });
+            var pageNumber = Number.parseInt(req.params.pageNumber) || 1; // TODO: Move this before fetching from DB and use to fetch precisely only what is required.
+            res.render("index", { mailCategories: mailCategories, pageNumber: pageNumber });
         }
     });
 };

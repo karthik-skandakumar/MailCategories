@@ -3,11 +3,45 @@
         
         <ol>
             <% mailCategories.forEach((mailCategory) => { %>
-            <li><%= mailCategory.name %>: <%= mailCategory.description %>: Created at <%= mailCategory.created.toDateString() %></li>
+            <li><%= mailCategory.name %>: <%= mailCategory.description %>: Created at <%= mailCategory.created.toDateString() %>
             <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                <img src="./public/icons/view.svg" alt="Edit">
             </button>
+            </li>            
             <% }); %>
         </ol>
+
+        <% var recordsPerPage = 10,
+               totalPageCount = Math.floor(mailCategories.length / recordsPerPage) + (mailCategories.length % 10 == 0 ? 0 : 1),
+               currentPageNumber = pageNumber,
+               showPrevious = (currentPageNumber > 1),
+               showNext = (currentPageNumber < totalPageCount); %>
+        <nav aria-label="Navigate pages">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <%= showPrevious ? "" : "disabled" %>">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li style="margin: 0 40px;">
+                    <input type="text" name="paginationPageNumber" id="paginationPageNumber" value="<%= currentPageNumber %>" placeholder="?" required style="width: 50px;"> 
+                    / <label id="paginationTotalPages" style="margin: 0 5px;"><%= totalPageCount %></label>
+                    <a class="btn btn-primary" id="submitPagination" href="#">Go</a>
+                </li>
+                <li class="page-item <%= showNext ? "" : "disabled" %>">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+            <%
+                // var pageNumberInput = currentPageNumber;
+                // pageNumberInput.addEventListener("change", (e) => {
+                //     console.log("/mailCategories/" + pageNumberInput.value);
+                // });
+                // pageNumberInput.addEventListener("keypress", (e) => {
+                //     console.log(e.which);
+                //     if(e.which === 13){
+                //         console.log("Entered the dragon");
+                //     }
+                // });
+            %>
+        </nav>
     </div>
 <% include partials/htmlFooter.ejs %>
